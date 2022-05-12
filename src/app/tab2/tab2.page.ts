@@ -4,8 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, delay } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
 import { HTTP } from '@ionic-native/http/ngx';
-
-
+import { File } from '@awesome-cordova-plugins/file/ngx';
+import { FileTransfer, FileUploadOptions, FileTransferObject} from '@awesome-cordova-plugins/file-transfer/ngx';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -13,7 +13,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 })
 export class Tab2Page implements OnInit {
 
-  constructor(private http: HttpClient, private httpIonic: HTTP) {}
+  constructor(private http: HttpClient, private httpIonic: HTTP, private file: File, private transfer: FileTransfer) {}
 
 
   async takePicture() {
@@ -21,7 +21,7 @@ export class Tab2Page implements OnInit {
       quality: 100,
       allowEditing: true,
       saveToGallery: true,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.Uri,
       promptLabelHeader: '照片',
       promptLabelCancel: '取消',
       promptLabelPhoto: '從相簿中',
@@ -29,32 +29,42 @@ export class Tab2Page implements OnInit {
     })
     console.log('image=', image)
 
-    let uploadUrl = 'https://192.168.10.44:5679/image/upload';
+    let uploadUrl = 'https://192.168.10.44:5679/file/uploadImage';
+    let fileName = image.path.split('/').pop()
+    let fileType = image.format
+    const fileTransfer: FileTransferObject = this.transfer.create();
 
+    let options: FileUploadOptions = {
+     fileKey: 'file',
+     fileName: `${fileName}`,
+     // mimeType: "multipart/form-data",
+     mimeType: `image/${fileType}`,
+     params: {
+       type: fileType
+     }
+   }
 
-
-
+   fileTransfer.upload(image.path, uploadUrl, options, true)
+   .then((data) => {
+     console.log('data=', data)
+   })
+   .catch((err) => {
+     console.log('err=', err)
+   })
     // let postData = new FormData();
     // postData.append('file', image.base64String)
     // postData.append('type', image.format)
-
-
-    // let uploadResult =  await this.http.post(uploadUrl, postData).toPromise()
-    this.httpIonic.setServerTrustMode('nocheck')
-    // let uploadResult = await this.httpIonic.post(uploadUrl, postData, {})
-
-    // console.log('uploadResult=', uploadResult)
-    let postData = {
-      file: image.base64String,
-      type: image.format
-    }
-    this.httpIonic.post(uploadUrl, postData, {})
-    .then(function(data) {
-      console.log('data=', data)
-    })
-    .catch(function(err) {
-      console.log('err=', err)
-    })
+    //
+    // this.httpIonic.setDataSerializer('multipart')
+    // this.httpIonic.setServerTrustMode('nocheck')
+    //
+    // this.httpIonic.post(uploadUrl, postData, {})
+    // .then(function(data) {
+    //   console.log('data=', data)
+    // })
+    // .catch(function(err) {
+    //   console.log('err=', err)
+    // })
   }
 
 
