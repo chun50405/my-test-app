@@ -1,6 +1,6 @@
 # my-test-app
 
-注意事項 
+## 注意事項 
 1.使用@awesome-cordova-plugins/media-capture 套件時
 
   實際上是用cordova-plugins-n0sm-media-capture 修正過後的內容複製到原始的
