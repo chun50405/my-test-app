@@ -23,6 +23,17 @@ import { StreamingMedia } from '@awesome-cordova-plugins/streaming-media/ngx';
 
 import { MediaCapture } from '@awesome-cordova-plugins/media-capture/ngx';
 
+
+
+//此套件在ios上面會build失敗 需要至XCode中的 CDVFileTransfer.m 拿掉 107 ~ 110行 程式如下
+/*
+
+NSString* userAgent = [self.commandDelegate userAgent];
+    if (userAgent) {
+        [req setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+    }
+
+ */
 import { FileTransfer} from '@awesome-cordova-plugins/file-transfer/ngx';
 
 @NgModule({
