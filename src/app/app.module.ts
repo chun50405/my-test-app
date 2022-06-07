@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MenuComponent } from './menu/menu.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -37,10 +38,10 @@ NSString* userAgent = [self.commandDelegate userAgent];
 import { FileTransfer} from '@awesome-cordova-plugins/file-transfer/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuComponent],
   entryComponents: [],
   imports: [BrowserModule, HttpClientModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
-  providers: [HTTP, Media, File, StreamingMedia, MediaCapture, FileTransfer, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [MenuComponent, HTTP, Media, File, StreamingMedia, MediaCapture, FileTransfer, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

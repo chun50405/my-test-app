@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, delay } from 'rxjs/operators';
-
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -37,7 +35,7 @@ export class Tab1Page {
  }
 
  doRefresh(event) {
-
    this.getNewList()
  }
+
 }

@@ -1,28 +1,26 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      股票新聞
-    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>股票新聞</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content >
   <!-- List of Text Items -->
-<ion-list *ngFor="let theNews of theNewsList" >
-  <ion-item (click)="openNews(theNews.url)">
-    <!-- <ion-avatar slot="start">
-      <img src="./avatar-finn.png" />
-    </ion-avatar> -->
+  <ion-list *ngFor="let theNews of theNewsList" >
+    <ion-item (click)="openNews(theNews.url)">
+      <!-- <ion-avatar slot="start">
+        <img src="./avatar-finn.png" />
+      </ion-avatar> -->
 
-      <p>{{theNews.subTitle}} - {{theNews.time}}</p>
-      <ion-text color="secondary">
-        <h1>{{theNews.title}}</h1>
-      </ion-text>
-
-
-  </ion-item>
-</ion-list>
+        <p>{{theNews.subTitle}} - {{theNews.time}}</p>
+        <ion-text color="secondary">
+          <h1>{{theNews.title}}</h1>
+        </ion-text>
 
 
-
+    </ion-item>
+  </ion-list>
 </ion-content>

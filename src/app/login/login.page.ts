@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 @Component({
@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   loginData: any = {}
 
-  constructor(private route: ActivatedRoute, private router: Router, public alertController: AlertController) { }
+  constructor(private router: Router, public alertController: AlertController) { }
 
 
   login() {
