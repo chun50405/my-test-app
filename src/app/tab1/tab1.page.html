@@ -1,16 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      股票新聞
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <!-- List of Text Items -->
-<ion-list *ngFor="let theUser of userList;index as i; ">
-  <ion-item>
-    <ion-label>{{theUser.name}}({{theUser.account}}) </ion-label>
+<ion-list *ngFor="let theNews of theNewsList" >
+  <ion-item (click)="openNews(theNews.url)">
+    <!-- <ion-avatar slot="start">
+      <img src="./avatar-finn.png" />
+    </ion-avatar> -->
+
+      <p>{{theNews.subTitle}} - {{theNews.time}}</p>
+      <ion-text color="secondary">
+        <h1>{{theNews.title}}</h1>
+      </ion-text>
+
+
   </ion-item>
 </ion-list>
 

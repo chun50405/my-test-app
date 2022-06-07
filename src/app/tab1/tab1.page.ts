@@ -9,54 +9,35 @@ import { catchError, retry, delay } from 'rxjs/operators';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
-  ApiUrl: string = 'https://localhost:3100/';
-  userList:any
-  sexList:any
+export class Tab1Page {
+  ApiUrl: string = 'https://localhost:5679/';
+  theNewsList: any
   constructor(private http: HttpClient) {}
 
 
 
-   getUser() {
-    return this.http.get(this.ApiUrl + 'medicalPersonnel')
-    // .pipe(delay(3000))
+
+  getNewList() {
+    return this.http.get(this.ApiUrl + 'news/stock')
     .toPromise()
-    .then((response) => {
-
-      this.userList = response
-      for(let theUser of this.userList) {
-        theUser.account = theUser.user ? theUser.user.account : ''
-
-      }
-      console.log('response=', response)
-      console.log('  this.userList=',   this.userList)
-
+    .then((data) => {
+      console.log('data=', data)
+      this.theNewsList = data
     })
   }
 
-   getSex() {
-    return this.http.get(this.ApiUrl + 'sex')
-    // .pipe(delay(2000))
-    .toPromise()
-    .then((response) => {
-      this.sexList = response
-      console.log('response=', response)
-      console.log('this.sexList=', this.sexList)
-    })
+
+  openNews(url) {
+    console.log('url=', url)
+    window.open(url, '_blank')
   }
 
-  async ngOnInit() {
-    // await this.getUser()
-    // await this.getSex();
-   }
+ ionViewWillEnter() {
+   this.getNewList()
+ }
 
-  async ionViewWillEnter() {
-     await this.getUser()
-     await this.getSex();
-   }
+ doRefresh(event) {
 
-  async doRefresh(event) {
-     await this.getUser()
-     await this.getSex();
-   }
+   this.getNewList()
+ }
 }

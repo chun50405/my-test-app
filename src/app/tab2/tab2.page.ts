@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, delay } from 'rxjs/operators';
 import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
-import { HTTP } from '@ionic-native/http/ngx';
-import { File } from '@awesome-cordova-plugins/file/ngx';
+import { HttpClient } from '@angular/common/http';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject} from '@awesome-cordova-plugins/file-transfer/ngx';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
-
-  constructor(private http: HttpClient, private httpIonic: HTTP, private file: File, private transfer: FileTransfer) {}
+export class Tab2Page {
+  testServerUrl:string = 'https://192.168.10.44:5679'
+  theUserList:any
+  constructor(private transfer: FileTransfer, private http: HttpClient, private httpIonic: HTTP) {}
 
 
   async takePicture() {
@@ -30,7 +30,13 @@ export class Tab2Page implements OnInit {
     console.log('image=', image)
 
     let uploadUrl = 'https://192.168.10.44:5679/file/uploadImage';
-    let fileName = image.path.split('/').pop()
+    let fileName;
+    if(image.path) {
+      fileName = image.path.split('/').pop()
+    }
+    if(image.webPath) {
+      fileName = image.webPath.split('/').pop()
+    }
     let fileType = image.format
     const fileTransfer: FileTransferObject = this.transfer.create();
 
@@ -51,24 +57,34 @@ export class Tab2Page implements OnInit {
    .catch((err) => {
      console.log('err=', err)
    })
-    // let postData = new FormData();
-    // postData.append('file', image.base64String)
-    // postData.append('type', image.format)
-    //
-    // this.httpIonic.setDataSerializer('multipart')
-    // this.httpIonic.setServerTrustMode('nocheck')
-    //
-    // this.httpIonic.post(uploadUrl, postData, {})
-    // .then(function(data) {
-    //   console.log('data=', data)
-    // })
-    // .catch(function(err) {
-    //   console.log('err=', err)
-    // })
+
+  }
+
+  async getUser() {
+
+    return this.http.get(this.testServerUrl + '/user/list')
+    .toPromise()
+    .then((data) => {
+      console.log('data=', data)
+      this.theUserList = data
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   }
 
 
-  ngOnInit() {
 
-  }
+
+
+
+  async ionViewWillEnter() {
+     await this.getUser()
+
+   }
+
+  async doRefresh(event) {
+     await this.getUser()
+
+   }
 }

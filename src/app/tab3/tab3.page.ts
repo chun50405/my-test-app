@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { File } from '@awesome-cordova-plugins/file/ngx';
 import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions } from '@awesome-cordova-plugins/media-capture/ngx';
-import { HTTP } from '@ionic-native/http/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject} from '@awesome-cordova-plugins/file-transfer/ngx';
 @Component({
   selector: 'app-tab3',
@@ -10,7 +9,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject} from '@awesome-cor
 })
 export class Tab3Page {
 
-  constructor(private file: File, private mediaCapture: MediaCapture, private httpIonic: HTTP, private transfer: FileTransfer) {
+  constructor(private file: File, private mediaCapture: MediaCapture, private transfer: FileTransfer) {
 
   }
   recordingVideo() {
