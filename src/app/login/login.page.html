@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <form>
+      <ion-row class="ion-align-self-center">
+        <ion-col>
+          <ion-item>
+            <ion-input [(ngModel)]="loginData.account" name="account" type="text" placeholder="Account Input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="ion-align-self-center">
+        <ion-col>
+          <ion-item>
+            <ion-input [(ngModel)]="loginData.password" name="password" type="password" placeholder="Password Input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="login()">Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+
+  </ion-grid>
+
+</ion-content>
