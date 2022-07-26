@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, delay } from 'rxjs/operators';
+import { Browser } from '@capacitor/browser';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -25,9 +27,11 @@ export class Tab1Page {
   }
 
 
-  openNews(url) {
-    console.log('url=', url)
-    window.open(url, '_blank')
+  async openNews(url) {
+
+    await Browser.open({ url: url, presentationStyle: 'popover' });
+    // console.log('url=', url)
+    // window.open(url, '_blank', 'location=no')
   }
 
  ionViewWillEnter() {
