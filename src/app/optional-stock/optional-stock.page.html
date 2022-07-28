@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>自選報價</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- style="overflow-x: scroll!important;flex-wrap: nowrap;" -->
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row class="ion-align-items-center" >
+          <ion-col size="3" >商品</ion-col>
+          <ion-col size="3">成交</ion-col>
+          <ion-col size="3">漲跌</ion-col>
+          <ion-col size="3">幅度</ion-col>
+          <!-- <ion-col size="3">單量</ion-col>
+          <ion-col size="3">總量</ion-col>
+          <ion-col size="3">買量</ion-col>
+          <ion-col size="3">賣量</ion-col>
+          <ion-col size="3">最高</ion-col>
+          <ion-col size="3">最低</ion-col>
+          <ion-col size="3">開盤</ion-col>
+          <ion-col size="3">作收</ion-col>
+          <ion-col size="3">時間</ion-col> -->
+        </ion-row>
+      </ion-grid>
+
+    </ion-item>
+    <ion-item *ngFor="let stockInfo of stockInfoList">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3">{{stockInfo.name}}</ion-col>
+          <ion-col size="3">{{stockInfo.price | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.upAndDown | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.range | percent: '1.0-2'}}</ion-col>
+          <!-- <ion-col size="3">{{stockInfo.singleAmount | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.totalAmount | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.buyAmount | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.sellAmount | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.highestPrice | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.lowestPrice | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.openPrice | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.yesterdayPrice | number: '1.0-2'}}</ion-col>
+          <ion-col size="3">{{stockInfo.time}}</ion-col> -->
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
