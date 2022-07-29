@@ -8,12 +8,15 @@ import { OptionalStockPageRoutingModule } from './optional-stock-routing.module'
 
 import { OptionalStockPage } from './optional-stock.page';
 
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    OptionalStockPageRoutingModule
+    OptionalStockPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [OptionalStockPage]
 })

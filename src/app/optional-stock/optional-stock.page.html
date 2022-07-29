@@ -1,51 +1,94 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>自選報價</ion-title>
+    <ion-button slot="end" color="primary" size="small" (click)="changeMode()">{{showModeList[showModeIndex]}}</ion-button>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="showModeIndex == 0">
 <!-- style="overflow-x: scroll!important;flex-wrap: nowrap;" -->
-  <ion-list>
-    <ion-item>
-      <ion-grid>
-        <ion-row class="ion-align-items-center" >
-          <ion-col size="3" >商品</ion-col>
-          <ion-col size="3">成交</ion-col>
-          <ion-col size="3">漲跌</ion-col>
-          <ion-col size="3">幅度</ion-col>
-          <!-- <ion-col size="3">單量</ion-col>
-          <ion-col size="3">總量</ion-col>
-          <ion-col size="3">買量</ion-col>
-          <ion-col size="3">賣量</ion-col>
-          <ion-col size="3">最高</ion-col>
-          <ion-col size="3">最低</ion-col>
-          <ion-col size="3">開盤</ion-col>
-          <ion-col size="3">作收</ion-col>
-          <ion-col size="3">時間</ion-col> -->
-        </ion-row>
-      </ion-grid>
+<!-- // Fixed Header
+          position: sticky;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 9999; -->
+<!-- class="ion-nowrap" -->
 
-    </ion-item>
-    <ion-item *ngFor="let stockInfo of stockInfoList">
-      <ion-grid>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="3">{{stockInfo.name}}</ion-col>
-          <ion-col size="3">{{stockInfo.price | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.upAndDown | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.range | percent: '1.0-2'}}</ion-col>
-          <!-- <ion-col size="3">{{stockInfo.singleAmount | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.totalAmount | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.buyAmount | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.sellAmount | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.highestPrice | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.lowestPrice | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.openPrice | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.yesterdayPrice | number: '1.0-2'}}</ion-col>
-          <ion-col size="3">{{stockInfo.time}}</ion-col> -->
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-list>
+       <ion-item>
+         <ion-grid>
+           <ion-row>
+             <ion-col size="3" *ngFor="let title of titleList; index as i;first as isFirst">
+               <ion-label>{{title}}</ion-label>
+             </ion-col>
+           </ion-row>
+          </ion-grid>
+       </ion-item>
+
+       <ion-item *ngFor="let stockInfo of stockInfoList">
+         <ion-grid>
+           <ion-row class="ion-align-items-center ">
+             <ion-col size="3">
+               <ion-label>
+                 {{stockInfo.name}}
+               </ion-label>
+             </ion-col>
+
+             <ion-col size="3">
+               <ion-label color="{{stockInfo.color}}">
+                 {{stockInfo.price | number: '1.0-2'}}
+               </ion-label>
+             </ion-col>
+             <ion-col size="3">
+               <ion-label color="{{stockInfo.color}}">
+                 {{stockInfo.upAndDown | number: '1.0-2'}}
+               </ion-label>
+             </ion-col>
+             <ion-col size="3">
+               <ion-label color="{{stockInfo.color}}">
+                 {{stockInfo.range | percent: '1.0-2'}}
+               </ion-label>
+             </ion-col>
+             <!-- <ion-col size="3">{{stockInfo.singleAmount | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.totalAmount | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.buyAmount | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.sellAmount | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.highestPrice | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.lowestPrice | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.openPrice | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.yesterdayPrice | number: '1.0-2'}}</ion-col>
+             <ion-col size="3">{{stockInfo.time}}</ion-col> -->
+           </ion-row>
+          </ion-grid>
+       </ion-item>
+
+</ion-content>
+
+
+
+<ion-content *ngIf="showModeIndex == 1">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let stockInfo of stockInfoList">
+        <ion-card>
+          <ion-card-header>
+            {{stockInfo.name}} - {{stockInfo.code}}
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              {{stockInfo.price | number: '1.0-2'}}
+            </ion-list>
+            <ion-list>
+              {{stockInfo.upAndDown | number: '1.0-2'}} - {{stockInfo.range | percent: '1.0-2'}}
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

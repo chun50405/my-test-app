@@ -30,11 +30,17 @@ export class StockService {
 
 
     for(let oneStock of stockInfo.msgArray) {
+      //因為證交所API的當下成交價格有可能為空的 所以就拿委賣(委買也可以)的第一筆當作成交價格
+      //可能會有些不準確 但也沒辦法
+      if(oneStock.z == '-') {
+        oneStock.z = oneStock.a.split('_')[0]
+      }
       let stockObj = {
         name: oneStock.n,
+        code: oneStock.c,
         price: oneStock.z,
-        upAndDown: oneStock.z - oneStock.y,
-        range: ((oneStock.z - oneStock.y) / oneStock.oa),
+        upAndDown: Math.abs(oneStock.z - oneStock.y),
+        range: (Math.abs(oneStock.z - oneStock.y) / oneStock.y),
         singleAmount: oneStock.ps,
         totalAmount: oneStock.v,
         buyAmount: oneStock.g.split('_')[0],
@@ -43,7 +49,8 @@ export class StockService {
         lowestPrice: oneStock.l,
         openPrice: oneStock.o,
         yesterdayPrice: oneStock.y,
-        time: oneStock.t
+        time: oneStock.t,
+        color: Math.abs(oneStock.z - oneStock.y) > 0 ? 'danger' : 'success'
       }
       result.push(stockObj)
     }

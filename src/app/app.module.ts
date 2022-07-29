@@ -37,6 +37,8 @@ NSString* userAgent = [self.commandDelegate userAgent];
  */
 import { FileTransfer} from '@awesome-cordova-plugins/file-transfer/ngx';
 
+
+
 @NgModule({
   declarations: [AppComponent, MenuComponent],
   entryComponents: [],

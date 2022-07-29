@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
 
 
   async login() {
-    console.log(this.loginData)
+    console.log('loginData =>',this.loginData)
     const loginInfo = {
       account: this.loginData.account,
       password: this.loginData.password

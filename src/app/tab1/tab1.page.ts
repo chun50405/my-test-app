@@ -18,7 +18,7 @@ export class Tab1Page {
 
 
   getNewList() {
-    return this.http.get(this.ApiUrl + 'news/stock')
+    return this.http.get(this.ApiUrl + 'stock/news')
     .toPromise()
     .then((data) => {
       console.log('data=', data)
