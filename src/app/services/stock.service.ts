@@ -50,7 +50,7 @@ export class StockService {
         openPrice: oneStock.o,
         yesterdayPrice: oneStock.y,
         time: oneStock.t,
-        color: Math.abs(oneStock.z - oneStock.y) > 0 ? 'danger' : 'success'
+        color: (oneStock.z - oneStock.y) > 0 ? 'danger' : 'success'
       }
       result.push(stockObj)
     }
