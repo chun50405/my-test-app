@@ -28,7 +28,7 @@
           </ion-grid>
        </ion-item>
 
-       <ion-item *ngFor="let stockInfo of stockInfoList">
+       <ion-item  *ngFor="let stockInfo of stockInfoList">
          <ion-grid>
            <ion-row class="ion-align-items-center ">
              <ion-col size="3">
@@ -37,17 +37,17 @@
                </ion-label>
              </ion-col>
 
-             <ion-col size="3">
+             <ion-col [@priceChange]="stockInfo.priceChange ? 'priceChange' : 'priceNotChange'" (@priceChange.done)="stockInfo.priceChange = false" size="3">
                <ion-label color="{{stockInfo.color}}">
                  {{stockInfo.price | number: '1.0-2'}}
                </ion-label>
              </ion-col>
-             <ion-col size="3">
+             <ion-col [@priceChange]="stockInfo.priceChange ? 'priceChange' : 'priceNotChange'" (@priceChange.done)="stockInfo.priceChange = false" size="3">
                <ion-label color="{{stockInfo.color}}">
                  {{stockInfo.upAndDown | number: '1.0-2'}}
                </ion-label>
              </ion-col>
-             <ion-col size="3">
+             <ion-col [@priceChange]="stockInfo.priceChange ? 'priceChange' : 'priceNotChange'" (@priceChange.done)="stockInfo.priceChange = false" size="3">
                <ion-label color="{{stockInfo.color}}">
                  {{stockInfo.range | percent: '1.0-2'}}
                </ion-label>

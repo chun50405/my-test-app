@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.myTestApp",
-	"appName": "myTestApp",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.myTestApp",
+  "appName": "myTestApp",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }
